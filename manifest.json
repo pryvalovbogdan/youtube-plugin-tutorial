@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "kakashi running youtube scrubber",
+  "description": "It will change yourube ui",
+  "version": "1.0",
+  "icons": {
+    "16": "assets/kakashi-icon-16.png",
+    "48": "assets/kakashi-icon-48.png",
+    "128": "assets/kakashi-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/content/content.js"
+      ],
+      "css": [
+        "src/stylesheets/content.css"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/chidori.gif",
+        "assets/kakashi.gif",
+        "assets/fire.gif"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "host_permissions": ["https://*.youtube.com/*"]
+}
