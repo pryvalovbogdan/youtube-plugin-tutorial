@@ -1,0 +1,197 @@
+{
+  // http://eslint.org/docs/rules/
+  "parser": "@babel/eslint-parser",
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    // browser global variables.
+    "node": true,
+    // Node.js global variables and Node.js-specific rules.
+    "es6": true,
+    // enable all ECMAScript 6 features except for modules.
+    "jest": true,
+    // jest global variables.
+    "webextensions": true
+    // Web extensions global variables.
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    // 0 - turn the rule off
+    // 1 - turn the rule on as a warning (doesn't affect exit code)
+    // 2 - turn the rule on as an error (exit code will be 1)
+
+    // Prettier configuration
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        // Specify the line length that the printer will wrap on
+        "semi": true,
+        // Print semicolons at the ends of statements.
+        "singleQuote": true,
+        // Use single quotes instead of double quotes.
+        "tabWidth": 2,
+        // Specify the number of spaces per indentation-level.
+        "trailingComma": "all",
+        // Print trailing commas wherever possible when multi-line.
+        "useTabs": false,
+        // Indent lines with tabs instead of spaces.
+        "endOfLine": "lf",
+        // Line Feed only (\n),
+        "arrowParens": "avoid"
+        // Include parentheses around a sole arrow function parameter.
+      }
+    ],
+    // Possible Errors
+    "no-extra-semi": 1,
+    // disallow unnecessary semicolons
+    "no-inner-declarations": 2,
+    // disallow function or variable declarations in nested blocks
+
+    // Best Practices
+
+    "curly": 2,
+    // specify curly brace conventions for all control statements
+    "no-eval": 2,
+    // disallow use of eval()
+    "no-extend-native": 2,
+    // disallow adding to native types
+    "no-new-wrappers": 2,
+    // disallows creating new instances of String, Number, and Boolean
+    "no-with": 2,
+    // disallow use of the with statement
+    "brace-style": [
+      "error",
+      "1tbs"
+    ],
+    // enforce consistent brace style for blocks
+
+    // Empty Lines
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let",
+          "var"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": [
+          "const",
+          "let",
+          "var"
+        ],
+        "next": [
+          "const",
+          "let",
+          "var"
+        ]
+      },
+      {
+        "blankLine": "always",
+        "prev": "import",
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": "import",
+        "next": "import"
+      },
+      {
+        "blankLine": "always",
+        "prev": "block-like",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "if"
+      },
+      {
+        "blankLine": "always",
+        "prev": "if",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "multiline-expression"
+      },
+      {
+        "blankLine": "always",
+        "prev": "multiline-expression",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "for"
+      },
+      {
+        "blankLine": "always",
+        "prev": "for",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "function"
+      },
+      {
+        "blankLine": "always",
+        "prev": "function",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "case",
+          "default"
+        ],
+        "next": "*"
+      }
+    ],
+    "lines-between-class-members": [
+      "error",
+      "always"
+    ],
+    // Variables
+    "no-undef": 1,
+    // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-unused-vars": 0,
+    // disallow unused variables
+
+
+    // Stylistic Issues
+    "array-bracket-spacing": [
+      2,
+      "never"
+    ],
+    // enforce spacing inside array brackets (off by default)
+
+    "no-array-constructor": 2,
+    // disallow use of the Array constructor
+    "no-mixed-spaces-and-tabs": 2,
+    // disallow mixed spaces and tabs for indentation
+    "no-new-object": 2,
+    // disallow use of the Object constructo
+    "semi": 1
+  }
+}

@@ -11,94 +11,96 @@ const mainContent = '#content';
 const url = 'chrome-extension://' + chrome.runtime.id + '/assets/';
 
 const addToolBars = () => {
-	/** Removing animated scrubber  **/
-	if (document.querySelector(oldScrubberClassName)) {
-		document.querySelector(oldScrubberClassName).style.display = 'none';
-	}
+  /** Removing animated scrubber  **/
+  if (document.querySelector(oldScrubberClassName)) {
+    document.querySelector(oldScrubberClassName).style.display = 'none';
+  }
 
-	/** Adding new animated scrubber  **/
-	const scrubber = document.querySelectorAll(defaultScrubberContainerClassName);
+  /** Adding new animated scrubber  **/
+  const scrubber = document.querySelectorAll(defaultScrubberContainerClassName);
 
-	scrubber.forEach(item => {
-		/** Check for not to add scrubber if ot already attached  **/
-		if (document.querySelectorAll(`.#{newScrubberClassName}`).length) {
-			return;
-		}
+  scrubber.forEach(item => {
+    /** Check for not to add scrubber if ot already attached  **/
+    if (document.querySelectorAll(`.${newScrubberClassName}`).length) {
+      return;
+    }
 
-		const newScrubber = document.createElement('img');
+    const newScrubber = document.createElement('img');
 
-		newScrubber.src = url + 'kakashi.gif';
-		newScrubber.className = newScrubberClassName;
+    newScrubber.src = url + 'kakashi.gif';
+    newScrubber.className = newScrubberClassName;
 
-		item.append(newScrubber);
-	})
+    item.append(newScrubber);
+  });
 
-	/** Adding new load progress bar  **/
-	const loadProgressBar = document.querySelectorAll(loadProgressBarClassName);
+  /** Adding new load progress bar  **/
+  const loadProgressBar = document.querySelectorAll(loadProgressBarClassName);
 
-	loadProgressBar.forEach(item => {
-		if (document.querySelectorAll(`.${newLoadProgressBarClassName}`).length) {
-			return;
-		}
+  loadProgressBar.forEach(item => {
+    if (document.querySelectorAll(`.${newLoadProgressBarClassName}`).length) {
+      return;
+    }
 
-		const newLoadBar = document.createElement('img');
+    const newLoadBar = document.createElement('img');
 
-		newLoadBar.src = url + 'chidori.gif';
-		newLoadBar.className = newLoadProgressBarClassName;
+    newLoadBar.src = url + 'chidori.gif';
+    newLoadBar.className = newLoadProgressBarClassName;
 
-		item.append(newLoadBar);
-	})
+    item.append(newLoadBar);
+  });
 
-	/** Adding new play progress bar  **/
-	const playProgressBar = document.querySelectorAll(playProgressBarClassName);
+  /** Adding new play progress bar  **/
+  const playProgressBar = document.querySelectorAll(playProgressBarClassName);
 
-	playProgressBar.forEach(item => {
-		if (document.querySelectorAll(`.${newPlayProgressbarClassName}`).length) {
-			return;
-		}
+  playProgressBar.forEach(item => {
+    if (document.querySelectorAll(`.${newPlayProgressbarClassName}`).length) {
+      return;
+    }
 
-		const newPlayBar = document.createElement('img');
+    const newPlayBar = document.createElement('img');
 
-		newPlayBar.src = url + 'fire.gif';
-		newPlayBar.className = newPlayProgressbarClassName;
+    newPlayBar.src = url + 'fire.gif';
+    newPlayBar.className = newPlayProgressbarClassName;
 
-		item.append(newPlayBar);
-	})
-}
+    item.append(newPlayBar);
+  });
+};
 
 const oldScrubber = document.querySelector(oldScrubberClassName);
 
 /** Checking if its secondary youtube page and adding scrubber **/
 if (oldScrubber) {
-	addToolBars()
+  addToolBars();
 }
 
 const targetNode = document.querySelector(mainContent);
 
 const addObserver = node => {
-	/** Config observer to react only for child changing **/
-	const config = {attributes: true, childList: true, subtree: true};
+  /** Config observer to react only for child changing **/
+  const config = { attributes: true, childList: true, subtree: true };
 
-	/** Callback will call on mutation **/
-	const callback = () => {
-		const newScrubber = document.querySelectorAll(`.#{newScrubberClassName}`);
+  /** Creating observer with callback **/
+  const observer = new MutationObserver(callback);
 
-		/** Beware of maximum call callback because after your changes it's triggers callback again! **/
-		if(newScrubber.length){
-			return
-		}
+  /** Callback will call on mutation **/
+  function callback() {
+    const newScrubber = document.querySelectorAll(`.${newScrubberClassName}`);
 
-		addToolBars();
-	};
+    /** Beware of maximum call callback because after your changes it's triggers callback again! **/
+    if (newScrubber.length) {
+      observer.disconnect();
 
-	/** Creating observer with callback **/
-	const observer = new MutationObserver(callback);
+      return;
+    }
 
-	/** Start observing for chapter toolbars with config **/
-	observer.observe(node, config);
-}
+    addToolBars();
+  }
+
+  /** Start observing for chapter toolbars with config **/
+  observer.observe(node, config);
+};
 
 /** Checking if its main youtube page and adding scrubber **/
 if (targetNode) {
-	addObserver(targetNode)
+  addObserver(targetNode);
 }
